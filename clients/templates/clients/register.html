@@ -1,0 +1,54 @@
+{% extends 'clients/base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Create Account</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="id_username" class="form-label">Username</label>
+                <input type="text" name="username" id="id_username" class="form-control" placeholder="Enter username">
+                {% if form.username.errors %}
+                    <small class="text-danger">{{ form.username.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_email" class="form-label">Email</label>
+                <input type="email" name="email" id="id_email" class="form-control" placeholder="Enter email">
+                {% if form.email.errors %}
+                    <small class="text-danger">{{ form.email.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_password" class="form-label">Password</label>
+                <input type="password" name="password" id="id_password" class="form-control" placeholder="Enter password">
+                {% if form.password.errors %}
+                    <small class="text-danger">{{ form.password.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="id_confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" name="confirm_password" id="id_confirm_password" class="form-control" placeholder="Confirm password">
+                {% if form.confirm_password.errors %}
+                    <small class="text-danger">{{ form.confirm_password.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">{{ form.non_field_errors.0 }}</div>
+            {% endif %}
+
+            <button class="btn btn-success w-100">Register</button>
+            <p class="text-center mt-3">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

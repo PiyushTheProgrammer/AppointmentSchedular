@@ -1,0 +1,32 @@
+{% extends 'clients/base.html' %}
+{% block title %}Appointment History{% endblock %}
+{% block content %}
+<h2>Completed Appointments</h2>
+<a class="btn btn-outline-primary mb-3" href="{% url 'admin_appointments' %}">Back to Pending</a>
+
+<table class="table table-bordered align-middle">
+    <thead class="table-success">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Student</th>
+            <th>Completed On</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appt in appointments %}
+        <tr>
+            <td><strong>{{ appt.title }}</strong></td>
+            <td>{{ appt.description|default:"—" }}</td>
+            <td>{{ appt.student.username }}</td>
+            <td>{{ appt.timestamp|date:"F j, Y, g:i A" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4" class="text-center text-muted">No completed appointments yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
